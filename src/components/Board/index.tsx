@@ -10,7 +10,7 @@ const WIDTH = 45;
 
 const Board = ({ data }: Props) => {
   return (
-    <table className="table-fixed border-collapse border-2 border-black">
+    <table className="table-fixed border-collapse border-2 border-black cursor-default">
       <tbody>
         {data.board.map((row, i) => {
           return (
