@@ -19,15 +19,24 @@ function App() {
   }, []);
 
   // const decodedSolution = decodeSolution(board.key);
-  const flatBoard = board.board.flat()
 
   return (
     <div className="container mx-auto">
-      <div className="grid gap-0 grid-cols-9 border-2 border-black">
-        {flatBoard.map((v, i) => {
-          return <Cell value={v} key={`cell-${i}`}></Cell>
-        })}
-      </div>
+      <table className="table-fixed border-collapse border-2 border-black">
+        <tbody>
+          {board.board.map((row, i) => {
+            return (
+              <tr className="border border-indigo-800">
+                {row.map((col, j) => {
+                  return (
+                    <Cell value={col} rowIdx={i} colIdx={j} />
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
