@@ -24,6 +24,7 @@ export const Cell = ({
     "border-b-2": (rowIdx + 1) % 3 === 0,
     "border-r-2": (colIdx + 1) % 3 === 0,
     "bg-green-200": selected,
+    "bg-gray-100": value !== 0,
   });
 
   return (
