@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import { useCallback, useState } from "react";
 import { SudokuBoard } from "../../common/model";
 import { Cell } from "../Cell";
 
@@ -9,14 +9,41 @@ type Props = {
 const WIDTH = 45;
 
 const Board = ({ data }: Props) => {
+  const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [selectedCol, setSelectedCol] = useState<number | null>(null);
+
+  const setSelectedCell = useCallback(
+    (rowIdx: number, colIdx: number) => {
+      if (selectedRow === rowIdx && selectedCol === colIdx) {
+        setSelectedRow(null);
+        setSelectedCol(null);
+        return;
+      }
+      setSelectedRow(rowIdx);
+      setSelectedCol(colIdx);
+    },
+    [selectedRow, selectedCol]
+  );
+
   return (
     <table className="table-fixed border-collapse border-2 border-black cursor-default">
       <tbody>
         {data.board.map((row, i) => {
           return (
-            <tr className="border border-indigo-800">
+            <tr key={`row-${i}`} className="border border-indigo-800">
               {row.map((col, j) => {
-                return <Cell value={col} rowIdx={i} colIdx={j} width={WIDTH} />;
+                return (
+                  <Cell
+                    key={`cell-${i}-${j}`}
+                    value={col}
+                    rowIdx={i}
+                    colIdx={j}
+                    width={WIDTH}
+                    selectedRow={selectedRow}
+                    selectedCol={selectedCol}
+                    setSelectedCell={setSelectedCell}
+                  />
+                );
               })}
             </tr>
           );
@@ -26,4 +53,4 @@ const Board = ({ data }: Props) => {
   );
 };
 
-export default Board
+export default Board;
