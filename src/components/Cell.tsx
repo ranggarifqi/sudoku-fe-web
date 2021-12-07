@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import isFinite from "lodash/isFinite";
 
 type Props = {
   value: number;
@@ -9,6 +10,7 @@ type Props = {
   selectedCol: number | null;
   setSelectedCell: (rowIdx: number, colIdx: number) => void;
   locked: boolean;
+  setCellValue: (rowIdx: number, colIdx: number, value: number) => void;
 };
 
 export const Cell = ({
@@ -20,6 +22,7 @@ export const Cell = ({
   selectedCol,
   setSelectedCell,
   locked,
+  setCellValue,
 }: Props) => {
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
   const curClassName = classNames("border", "border-black", "text-center", {
@@ -28,6 +31,23 @@ export const Cell = ({
     "bg-green-200": selected,
     "bg-gray-100": locked,
   });
+
+  const onKeyUp = (event: React.KeyboardEvent<HTMLTableCellElement>) => {
+    if (selected) {
+      const digit = parseInt(event.key);
+      const isDigit = isFinite(digit);
+
+      if (isDigit && digit >= 1 && digit <= 9) {
+        setCellValue(rowIdx, colIdx, digit);
+        return;
+      }
+
+      if (event.key === "Backspace") {
+        setCellValue(rowIdx, colIdx, 0);
+        return;
+      }
+    }
+  };
 
   return (
     <td
@@ -41,6 +61,8 @@ export const Cell = ({
           setSelectedCell(rowIdx, colIdx);
         }
       }}
+      onKeyUp={onKeyUp}
+      tabIndex={0}
     >
       {value === 0 ? "" : value}
     </td>

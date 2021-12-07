@@ -4,11 +4,12 @@ import { Cell } from "../Cell";
 
 type Props = {
   data: SudokuBoard;
+  setCellValue: (rowIdx: number, colIdx: number, value: number) => void;
 };
 
 const WIDTH = 45;
 
-const Board = ({ data }: Props) => {
+const Board = ({ data, setCellValue }: Props) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
 
@@ -43,6 +44,7 @@ const Board = ({ data }: Props) => {
                     selectedCol={selectedCol}
                     setSelectedCell={setSelectedCell}
                     locked={data.lock ? data.lock[i][j] : false}
+                    setCellValue={setCellValue}
                   />
                 );
               })}
