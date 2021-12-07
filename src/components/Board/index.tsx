@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SudokuBoard } from "../../common/model";
 import { Cell } from "../Cell";
 
@@ -42,6 +42,7 @@ const Board = ({ data }: Props) => {
                     selectedRow={selectedRow}
                     selectedCol={selectedCol}
                     setSelectedCell={setSelectedCell}
+                    locked={data.lock ? data.lock[i][j] : false}
                   />
                 );
               })}

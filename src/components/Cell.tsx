@@ -8,6 +8,7 @@ type Props = {
   selectedRow: number | null;
   selectedCol: number | null;
   setSelectedCell: (rowIdx: number, colIdx: number) => void;
+  locked: boolean;
 };
 
 export const Cell = ({
@@ -18,13 +19,14 @@ export const Cell = ({
   selectedRow,
   selectedCol,
   setSelectedCell,
+  locked,
 }: Props) => {
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
   const curClassName = classNames("border", "border-black", "text-center", {
     "border-b-2": (rowIdx + 1) % 3 === 0,
     "border-r-2": (colIdx + 1) % 3 === 0,
     "bg-green-200": selected,
-    "bg-gray-100": value !== 0,
+    "bg-gray-100": locked,
   });
 
   return (
@@ -35,7 +37,7 @@ export const Cell = ({
         height: width + "px",
       }}
       onClick={() => {
-        if (value === 0) {
+        if (!locked) {
           setSelectedCell(rowIdx, colIdx);
         }
       }}
