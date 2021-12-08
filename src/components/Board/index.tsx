@@ -1,15 +1,22 @@
-import { useCallback, useEffect, useState } from "react";
-import { SudokuBoard } from "../../common/model";
+import { useCallback, useState } from "react";
+import { Loader } from "react-feather";
+import { useAppSelector } from "../../common/hooks";
+import {
+  sltBoard,
+  sltSudokuBoardErrorMsg,
+  sltSudokuBoardIsLoading,
+  sltSudokuBoardLock,
+} from "../../store/sudokuBoard/selectors";
 import { Cell } from "../Cell";
-
-type Props = {
-  data: SudokuBoard;
-  setCellValue: (rowIdx: number, colIdx: number, value: number) => void;
-};
 
 const WIDTH = 45;
 
-const Board = ({ data, setCellValue }: Props) => {
+const Board = () => {
+  const board = useAppSelector(sltBoard);
+  const boardLock = useAppSelector(sltSudokuBoardLock);
+  const isLoading = useAppSelector(sltSudokuBoardIsLoading);
+  const errorMsg = useAppSelector(sltSudokuBoardErrorMsg);
+
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
 
@@ -26,10 +33,18 @@ const Board = ({ data, setCellValue }: Props) => {
     [selectedRow, selectedCol]
   );
 
+  if (isLoading) {
+    return <Loader className="animate-spin-slow" />;
+  }
+
+  if (errorMsg) {
+    return <div>{errorMsg}</div>;
+  }
+
   return (
     <table className="table-fixed border-collapse border-2 border-black cursor-default">
       <tbody>
-        {data.board.map((row, i) => {
+        {board.map((row, i) => {
           return (
             <tr key={`row-${i}`} className="border border-indigo-800">
               {row.map((col, j) => {
@@ -43,8 +58,7 @@ const Board = ({ data, setCellValue }: Props) => {
                     selectedRow={selectedRow}
                     selectedCol={selectedCol}
                     setSelectedCell={setSelectedCell}
-                    locked={data.lock ? data.lock[i][j] : false}
-                    setCellValue={setCellValue}
+                    locked={boardLock ? boardLock[i][j] : false}
                   />
                 );
               })}
