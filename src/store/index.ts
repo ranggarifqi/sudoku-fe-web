@@ -1,11 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import sudokuBoardReducer from "./sudokuBoard";
+import rootReducer from "./rootReducer";
 
 export const store = configureStore({
-  reducer: {
-    sudokuBoard: sudokuBoardReducer,
-  },
+  reducer: rootReducer,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

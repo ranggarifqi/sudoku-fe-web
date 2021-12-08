@@ -8,15 +8,5 @@ export const getSudokuBoard = async (
   const { data } = await api.post<SudokuBoard>("/new-board", {
     difficulty,
   });
-
-  const lock = data.board.map((row) => {
-    return row.map((cell) => {
-      return cell !== 0;
-    });
-  });
-
-  return {
-    ...data,
-    lock,
-  };
+  return data;
 };
