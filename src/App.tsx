@@ -1,38 +1,21 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { getSudokuBoard } from "./common/api";
-import { SudokuBoard } from "./common/api/model";
+import { useAppDispatch } from "./common/hooks";
 import Board from "./components/Board";
 
 import "./index.css";
+import { getNewSudokuBoard } from "./store/sudokuBoard/thunks";
 
-// TODO: Use Redux to prevent prop drilling
 function App() {
-  const [board, setBoard] = useState<SudokuBoard>({ board: [], key: "" });
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const getBoard = async () => {
-      const board = await getSudokuBoard();
-      setBoard(board);
-    };
-    getBoard();
+    dispatch(getNewSudokuBoard());
   }, []);
-
-  const setCellValue = useCallback(
-    (rowIdx: number, colIdx: number, value: number) => {
-      const newBoard = [...board.board];
-      newBoard[rowIdx][colIdx] = value;
-      setBoard({
-        ...board,
-        board: newBoard,
-      });
-    },
-    [board]
-  );
 
   return (
     <div className="container mx-auto h-screen flex justify-center items-center">
-      <Board data={board} setCellValue={setCellValue} />
+      <Board />
     </div>
   );
 }

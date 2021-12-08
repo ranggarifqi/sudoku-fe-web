@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { decodeSolution } from "../../common/encryption";
+import { setCellValueHandler } from "./reducers";
 import { getNewSudokuBoard } from "./thunks";
 
 export interface SudokuBoardState {
@@ -21,7 +22,9 @@ export const initialState: SudokuBoardState = {
 export const sudokuBoardSlice = createSlice({
   name: "sudokuBoard",
   initialState,
-  reducers: {},
+  reducers: {
+    setCellValue: setCellValueHandler,
+  },
   extraReducers: (builder) => {
     builder.addCase(getNewSudokuBoard.pending, (state) => {
       state.isLoading = true;
@@ -44,5 +47,7 @@ export const sudokuBoardSlice = createSlice({
     });
   },
 });
+
+export const { setCellValue } = sudokuBoardSlice.actions;
 
 export default sudokuBoardSlice.reducer;
