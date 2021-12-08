@@ -1,5 +1,5 @@
 import { getAxiosInstance } from "../axios";
-import { SudokuBoard } from "../model";
+import { SudokuBoard } from "./model";
 
 export const getSudokuBoard = async (
   difficulty: number = 2

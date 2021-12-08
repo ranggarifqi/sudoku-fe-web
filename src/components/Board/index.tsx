@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SudokuBoard } from "../../common/model";
+import { SudokuBoard } from "../../common/api/model";
 import { Cell } from "../Cell";
 
 type Props = {

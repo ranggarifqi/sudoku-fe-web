@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { getSudokuBoard } from "./common/api";
-import { SudokuBoard } from "./common/model";
+import { SudokuBoard } from "./common/api/model";
 import Board from "./components/Board";
 
 import "./index.css";
