@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import isFinite from "lodash/isFinite";
-import { useAppDispatch } from "../common/hooks";
-import { setCellValue } from "../store/sudokuBoard";
+import { useAppDispatch, useAppSelector } from "../../common/hooks";
+import { setCellValue } from "../../store/sudokuBoard";
+import { sltSudokuBoardSolution } from "../../store/sudokuBoard/selectors";
 
 type Props = {
   value: number;
@@ -10,7 +11,7 @@ type Props = {
   width: number;
   selectedRow: number | null;
   selectedCol: number | null;
-  setSelectedCell: (rowIdx: number, colIdx: number) => void;
+  setSelectedCell: (rowIdx: number | null, colIdx: number | null) => void;
   locked: boolean;
 };
 
@@ -25,6 +26,8 @@ export const Cell = ({
   locked,
 }: Props) => {
   const dispatch = useAppDispatch();
+
+  const solution = useAppSelector(sltSudokuBoardSolution);
 
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
   const curClassName = classNames("border", "border-black", "text-center", {
@@ -47,6 +50,8 @@ export const Cell = ({
             value: digit,
           })
         );
+        setSelectedCell(null, null);
+
         return;
       }
 
@@ -58,6 +63,7 @@ export const Cell = ({
             value: 0,
           })
         );
+        setSelectedCell(null, null);
         return;
       }
     }

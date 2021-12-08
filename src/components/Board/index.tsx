@@ -7,7 +7,7 @@ import {
   sltSudokuBoardIsLoading,
   sltSudokuBoardLock,
 } from "../../store/sudokuBoard/selectors";
-import { Cell } from "../Cell";
+import { Cell } from "./Cell";
 
 const WIDTH = 45;
 
@@ -21,7 +21,7 @@ const Board = () => {
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
 
   const setSelectedCell = useCallback(
-    (rowIdx: number, colIdx: number) => {
+    (rowIdx: number | null, colIdx: number | null) => {
       if (selectedRow === rowIdx && selectedCol === colIdx) {
         setSelectedRow(null);
         setSelectedCol(null);
