@@ -1,7 +1,10 @@
 import { useCallback, useState } from "react";
+import { Loader } from "react-feather";
 import { useAppSelector } from "../../common/hooks";
 import {
   sltBoard,
+  sltSudokuBoardErrorMsg,
+  sltSudokuBoardIsLoading,
   sltSudokuBoardLock,
 } from "../../store/sudokuBoard/selectors";
 import { Cell } from "../Cell";
@@ -11,6 +14,8 @@ const WIDTH = 45;
 const Board = () => {
   const board = useAppSelector(sltBoard);
   const boardLock = useAppSelector(sltSudokuBoardLock);
+  const isLoading = useAppSelector(sltSudokuBoardIsLoading);
+  const errorMsg = useAppSelector(sltSudokuBoardErrorMsg);
 
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
@@ -27,6 +32,14 @@ const Board = () => {
     },
     [selectedRow, selectedCol]
   );
+
+  if (isLoading) {
+    return <Loader className="animate-spin-slow" />;
+  }
+
+  if (errorMsg) {
+    return <div>{errorMsg}</div>;
+  }
 
   return (
     <table className="table-fixed border-collapse border-2 border-black cursor-default">
