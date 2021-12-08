@@ -30,11 +30,14 @@ export const Cell = ({
   const solution = useAppSelector(sltSudokuBoardSolution);
 
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
+  const isIncorrectValue = value !== 0 && solution[rowIdx][colIdx] !== value;
+
   const curClassName = classNames("border", "border-black", "text-center", {
     "border-b-2": (rowIdx + 1) % 3 === 0,
     "border-r-2": (colIdx + 1) % 3 === 0,
     "bg-green-200": selected,
     "bg-gray-100": locked,
+    "bg-red-200": isIncorrectValue,
   });
 
   const onKeyUp = (event: React.KeyboardEvent<HTMLTableCellElement>) => {
