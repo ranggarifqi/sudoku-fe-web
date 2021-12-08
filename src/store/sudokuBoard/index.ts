@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SudokuBoard } from "../../common/api/model";
 import { decodeSolution } from "../../common/encryption";
-import { getNewSudokuBoard } from "./api";
+import { getNewSudokuBoard } from "./thunks";
 
 export interface SudokuBoardState {
   board: number[][];
