@@ -11,7 +11,7 @@ export interface SudokuBoardState {
   errorMsg: string | null;
 }
 
-export const initialState: SudokuBoardState = {
+const initialState: SudokuBoardState = {
   board: [],
   solution: [],
   lock: [],
@@ -48,6 +48,7 @@ export const sudokuBoardSlice = createSlice({
   },
 });
 
+export * from "./selectors";
 export const { setCellValue } = sudokuBoardSlice.actions;
 
 export default sudokuBoardSlice.reducer;

@@ -6,7 +6,7 @@ import {
   sltSudokuBoardErrorMsg,
   sltSudokuBoardIsLoading,
   sltSudokuBoardLock,
-} from "../../store/sudokuBoard/selectors";
+} from "../../store/sudokuBoard";
 import { Cell } from "./Cell";
 
 const WIDTH = 45;
