@@ -33,10 +33,14 @@ export const healthPointSlice = createSlice({
         state.life -= action.payload;
       }
     },
+    resetLife: (state) => {
+      state.life = initialState.life;
+    },
   },
 });
 
 export * from "./selectors";
-export const { increaseLife, decreaseLife } = healthPointSlice.actions;
+export const { increaseLife, decreaseLife, resetLife } =
+  healthPointSlice.actions;
 
 export default healthPointSlice.reducer;

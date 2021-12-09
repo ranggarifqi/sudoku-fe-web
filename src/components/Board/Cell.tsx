@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import isFinite from "lodash/isFinite";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../common/hooks";
+import { decreaseLife } from "../../store/healthPoint";
 import { setCellValue } from "../../store/sudokuBoard";
 import { sltSudokuBoardSolution } from "../../store/sudokuBoard/selectors";
 
@@ -31,6 +33,12 @@ export const Cell = ({
 
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
   const isIncorrectValue = value !== 0 && solution[rowIdx][colIdx] !== value;
+
+  useEffect(() => {
+    if (isIncorrectValue) {
+      dispatch(decreaseLife(1));
+    }
+  }, [isIncorrectValue]);
 
   const curClassName = classNames("border", "border-black", "text-center", {
     "border-b-2": (rowIdx + 1) % 3 === 0,

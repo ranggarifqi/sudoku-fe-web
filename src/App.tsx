@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useAppDispatch } from "./common/hooks";
-import Board from "./components/Board";
+import RenderBoard from "./components/RenderBoard";
 
 import "./index.css";
 import { getNewSudokuBoard } from "./store/sudokuBoard/thunks";
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="container mx-auto h-screen flex justify-center items-center">
-      <Board />
+      <RenderBoard />
     </div>
   );
 }

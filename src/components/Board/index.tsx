@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Loader } from "react-feather";
 import { useAppSelector } from "../../common/hooks";
+import { sltHealthPointLive } from "../../store/healthPoint";
 import {
   sltBoard,
   sltSudokuBoardErrorMsg,
@@ -11,11 +12,15 @@ import { Cell } from "./Cell";
 
 const WIDTH = 45;
 
+// TODO: Change life UI into Minecraft's health icon
+// TODO: Add functionlity to increase life, similiar to Minecraft's hunger. When we set the correct answer, it will increase the hunger. If hunger = 5, 1 live will be added
+// TODO: Lock correct answer (so it can't be edited)
 const Board = () => {
   const board = useAppSelector(sltBoard);
   const boardLock = useAppSelector(sltSudokuBoardLock);
   const isLoading = useAppSelector(sltSudokuBoardIsLoading);
   const errorMsg = useAppSelector(sltSudokuBoardErrorMsg);
+  const life = useAppSelector(sltHealthPointLive);
 
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
@@ -42,31 +47,36 @@ const Board = () => {
   }
 
   return (
-    <table className="table-fixed border-collapse border-2 border-black cursor-default">
-      <tbody>
-        {board.map((row, i) => {
-          return (
-            <tr key={`row-${i}`} className="border border-indigo-800">
-              {row.map((col, j) => {
-                return (
-                  <Cell
-                    key={`cell-${i}-${j}`}
-                    value={col}
-                    rowIdx={i}
-                    colIdx={j}
-                    width={WIDTH}
-                    selectedRow={selectedRow}
-                    selectedCol={selectedCol}
-                    setSelectedCell={setSelectedCell}
-                    locked={boardLock ? boardLock[i][j] : false}
-                  />
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="space-y-2">
+      <table className="table-fixed border-collapse border-2 border-black cursor-default">
+        <tbody>
+          {board.map((row, i) => {
+            return (
+              <tr key={`row-${i}`} className="border border-indigo-800">
+                {row.map((col, j) => {
+                  return (
+                    <Cell
+                      key={`cell-${i}-${j}`}
+                      value={col}
+                      rowIdx={i}
+                      colIdx={j}
+                      width={WIDTH}
+                      selectedRow={selectedRow}
+                      selectedCol={selectedCol}
+                      setSelectedCell={setSelectedCell}
+                      locked={boardLock ? boardLock[i][j] : false}
+                    />
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <div>
+        <span>Life: {life}</span>
+      </div>
+    </div>
   );
 };
 
