@@ -32,7 +32,7 @@ export const Cell = ({
   const solution = useAppSelector(sltSudokuBoardSolution);
 
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
-  const isIncorrectValue = value !== 0 && solution[rowIdx][colIdx] !== value;
+  const isIncorrectValue = !selected && value !== 0 && solution[rowIdx][colIdx] !== value;
 
   useEffect(() => {
     if (isIncorrectValue) {
