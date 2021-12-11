@@ -43,8 +43,8 @@ export const Cell = ({
   const curClassName = classNames("border", "border-black", "text-center", {
     "border-b-2": (rowIdx + 1) % 3 === 0,
     "border-r-2": (colIdx + 1) % 3 === 0,
-    "bg-green-200": selected,
     "bg-gray-100": locked,
+    "bg-green-200": selected,
     "bg-red-200": isIncorrectValue,
   });
 

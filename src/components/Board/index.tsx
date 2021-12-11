@@ -9,12 +9,13 @@ import {
   sltSudokuBoardLock,
 } from "../../store/sudokuBoard";
 import { Cell } from "./Cell";
+import HealthPoint from "./HealthPoint";
 
 const WIDTH = 45;
 
-// TODO: Change life UI into Minecraft's health icon
 // TODO: Add functionlity to increase life, similiar to Minecraft's hunger. When we set the correct answer, it will increase the hunger. If hunger = 5, 1 live will be added
 // TODO: Lock correct answer (so it can't be edited)
+// TODO: Add Note Feature
 const Board = () => {
   const board = useAppSelector(sltBoard);
   const boardLock = useAppSelector(sltSudokuBoardLock);
@@ -73,9 +74,7 @@ const Board = () => {
           })}
         </tbody>
       </table>
-      <div>
-        <span>Life: {life}</span>
-      </div>
+      <HealthPoint />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const MAX_LIFE = 5;
+export const MAX_LIFE = 3;
 const MIN_LIFE = 0;
 
 export interface HealthPointState {
