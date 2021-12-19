@@ -14,8 +14,14 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto h-screen flex justify-center items-center">
+    <div className="container mx-auto h-screen flex flex-col justify-center items-center">
       <RenderBoard />
+      <div className="footer space-x-1">
+        <span>© 2021-2022</span>
+        <a href="https://ranggarifqi.com" target="_blank">
+          Rangga Rifqi Pratama
+        </a>
+      </div>
     </div>
   );
 }
