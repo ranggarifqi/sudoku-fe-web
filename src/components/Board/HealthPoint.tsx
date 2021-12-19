@@ -4,7 +4,7 @@ import { MAX_LIFE, sltHealthPointLive } from "../../store/healthPoint";
 import HealthOnPng from "../../common/images/mc-heart-on.png";
 import HealthOffPng from "../../common/images/mc-heart-off.png";
 
-const IMG_WIDTH = 20
+const IMG_WIDTH = 20;
 
 const HealthPoint = () => {
   const life = useAppSelector(sltHealthPointLive);
@@ -13,17 +13,17 @@ const HealthPoint = () => {
 
   return (
     <div className="inline-flex space-x-1">
-      {healthPoints.map((v) => {
+      {healthPoints.map((v, i) => {
         if (v + 1 <= life) {
           return (
-            <span>
+            <span key={`hp-${i}`}>
               <img src={HealthOnPng} alt="hp-on" width={IMG_WIDTH} />
             </span>
           );
         }
 
         return (
-          <span>
+          <span key={`hp-${i}`}>
             <img src={HealthOffPng} alt="hp-off" width={IMG_WIDTH} />
           </span>
         );
