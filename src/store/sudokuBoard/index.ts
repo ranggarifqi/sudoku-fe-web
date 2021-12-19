@@ -50,6 +50,6 @@ export const sudokuBoardSlice = createSlice({
 });
 
 export * from "./selectors";
-export const { setCellValue } = sudokuBoardSlice.actions;
+export const { setCellValue, lockCellValue } = sudokuBoardSlice.actions;
 
 export default sudokuBoardSlice.reducer;
