@@ -7,7 +7,7 @@ interface CellRowCol {
   colIdx: number;
 }
 
-interface SetCellValuePayload extends CellRowCol {
+export interface SetCellValuePayload extends CellRowCol {
   value: number;
 }
 
