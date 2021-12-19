@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { Loader } from "react-feather";
 import { useAppSelector } from "../../common/hooks";
-import { sltHealthPointLive } from "../../store/healthPoint";
 import {
   sltBoard,
   sltSudokuBoardErrorMsg,
@@ -14,14 +13,12 @@ import HealthPoint from "./HealthPoint";
 const WIDTH = 45;
 
 // TODO: Add functionlity to increase life, similiar to Minecraft's hunger. When we set the correct answer, it will increase the hunger. If hunger = 5, 1 live will be added
-// TODO: Lock correct answer (so it can't be edited)
 // TODO: Add Note Feature
 const Board = () => {
   const board = useAppSelector(sltBoard);
   const boardLock = useAppSelector(sltSudokuBoardLock);
   const isLoading = useAppSelector(sltSudokuBoardIsLoading);
   const errorMsg = useAppSelector(sltSudokuBoardErrorMsg);
-  const life = useAppSelector(sltHealthPointLive);
 
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { decodeSolution } from "../../common/encryption";
-import { setCellValueHandler } from "./reducers";
+import { lockCellValueHandler, setCellValueHandler } from "./reducers";
 import { getNewSudokuBoard } from "./thunks";
 
 export interface SudokuBoardState {
@@ -24,6 +24,7 @@ export const sudokuBoardSlice = createSlice({
   initialState,
   reducers: {
     setCellValue: setCellValueHandler,
+    lockCellValue: lockCellValueHandler,
   },
   extraReducers: (builder) => {
     builder.addCase(getNewSudokuBoard.pending, (state) => {
@@ -49,6 +50,6 @@ export const sudokuBoardSlice = createSlice({
 });
 
 export * from "./selectors";
-export const { setCellValue } = sudokuBoardSlice.actions;
+export const { setCellValue, lockCellValue } = sudokuBoardSlice.actions;
 
 export default sudokuBoardSlice.reducer;
