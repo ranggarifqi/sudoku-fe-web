@@ -12,7 +12,7 @@ const HealthPoint = () => {
   const healthPoints = times(MAX_LIFE);
 
   return (
-    <div className="inline-flex space-x-1">
+    <div className="inline-flex space-x-1 items-center w-full justify-center">
       {healthPoints.map((v, i) => {
         if (v + 1 <= life) {
           return (
