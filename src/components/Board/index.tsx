@@ -1,12 +1,6 @@
 import { useCallback, useState } from "react";
-import { Loader } from "react-feather";
 import { useAppSelector } from "../../common/hooks";
-import {
-  sltBoard,
-  sltSudokuBoardErrorMsg,
-  sltSudokuBoardIsLoading,
-  sltSudokuBoardLock,
-} from "../../store/sudokuBoard";
+import { sltBoard, sltSudokuBoardLock } from "../../store/sudokuBoard";
 import { Cell } from "./Cell";
 import HealthPoint from "./HealthPoint";
 
@@ -17,8 +11,6 @@ const WIDTH = 45;
 const Board = () => {
   const board = useAppSelector(sltBoard);
   const boardLock = useAppSelector(sltSudokuBoardLock);
-  const isLoading = useAppSelector(sltSudokuBoardIsLoading);
-  const errorMsg = useAppSelector(sltSudokuBoardErrorMsg);
 
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
   const [selectedCol, setSelectedCol] = useState<number | null>(null);
@@ -35,14 +27,6 @@ const Board = () => {
     },
     [selectedRow, selectedCol]
   );
-
-  if (isLoading) {
-    return <Loader className="animate-spin-slow" />;
-  }
-
-  if (errorMsg) {
-    return <div>{errorMsg}</div>;
-  }
 
   return (
     <div className="space-y-2">

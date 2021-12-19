@@ -20,3 +20,24 @@ export const sltSudokuBoardSolution = createSelector(
   sltSudokuBoard,
   (state) => state.solution
 );
+
+export const sltIsSudokuBoardFinished = createSelector(
+  sltSudokuBoardLock,
+  (locks) => {
+    let isFinished = true;
+    locks.forEach((rows) => {
+      rows.forEach((cell) => {
+        if (!cell) {
+          isFinished = false;
+          return;
+        }
+      });
+
+      if (!isFinished) {
+        return;
+      }
+    });
+
+    return isFinished;
+  }
+);
