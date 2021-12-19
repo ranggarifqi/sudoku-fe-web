@@ -32,13 +32,7 @@ export const Cell = ({
   const solution = useAppSelector(sltSudokuBoardSolution);
 
   const selected = selectedRow === rowIdx && selectedCol === colIdx;
-  const isIncorrectValue = !selected && value !== 0 && solution[rowIdx][colIdx] !== value;
-
-  useEffect(() => {
-    if (isIncorrectValue) {
-      dispatch(decreaseLife(1));
-    }
-  }, [isIncorrectValue]);
+  const isIncorrectValue = value !== 0 && solution[rowIdx][colIdx] !== value;
 
   const curClassName = classNames("border", "border-black", "text-center", {
     "border-b-2": (rowIdx + 1) % 3 === 0,
